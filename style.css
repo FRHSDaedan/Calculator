@@ -24,7 +24,7 @@ body {
     padding-top:10px;
 }
 
-#display {
+#result {
     width:380px;
     height:40px;
     font-size:18px;
@@ -34,6 +34,16 @@ body {
     border-bottom:1px inset #FFF;
     border-right:1px inset #FFF;
     background-color:#D5F192;
+}
+
+.delete {
+    width:40px;
+    height:40px;
+    font-size:18px;
+    color:black;
+    margin:4px;
+    border:2px inset black;
+    background-color: tan;
 }
 
 .button_number {

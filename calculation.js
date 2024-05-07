@@ -53,3 +53,24 @@ function backSpace() {
     let bsp = document.getElementById("display").value;
     document.getElementById("display").value=bsp.substring(0,bsp.length -1);
 }
+
+//-------------------------------------------------History Shenanigans-------------------------------------------------------------
+
+const buttons = document.querySelectorAll('.buttons button')
+const inputEl = document.querySelector('input')
+const output = document.querySelector('#output')
+const historyContainer = document.querySelector('.historyContainer')
+
+const STORAGE_NAME = 'historyStorage';
+
+if (localStorage.getItem(STORAGE_NAME) == null) {
+    localStorage.setItem(STORAGE_NAME, JSON.stringify([]))
+}
+
+refreshHistory()
+
+function registrateChange() {
+    let newValue = eval(inputEl.value) || ''
+
+    output.value = newValue
+}

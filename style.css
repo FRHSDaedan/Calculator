@@ -24,7 +24,25 @@ body {
     padding-top:10px;
 }
 
+.historyContainer {
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 #display {
+    width:380px;
+    height:40px;
+    font-size:18px;
+    color:black;
+    margin:4px;
+    border:2px inset black;
+    border-bottom:1px inset #FFF;
+    border-right:1px inset #FFF;
+    background-color:#D5F192;
+}
+
+#output {
     width:380px;
     height:40px;
     font-size:18px;

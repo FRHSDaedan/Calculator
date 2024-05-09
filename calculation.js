@@ -2,10 +2,6 @@ function display(value) {
     document.getElementById("result").value += value;
 }
 
-function clearScreen() {
-    document.getElementById("result").value = "";
-}
-
 function calculate() {
     let p = document.getElementById("display").value;
     let q = eval(p);
@@ -17,7 +13,7 @@ function calculate() {
         expression = expression.replace(/cos\(/g, 'cos(' + Math.PI / 180 + '*');
         expression = expression.replace(/tan\(/g, 'tan(' + Math.PI / 180 + '*');
 
-        result = math.evaluate(expression);
+        result = Math.evaluate(expression);
         display.value = result;
     } catch (error) {
         display.value = "Error";
@@ -26,12 +22,12 @@ function calculate() {
 
 function squareRoot() {
     let display = document.getElementById("display");
-    display.value += "sqrt(";
+    display.value += "Math.sqrt(";
 }
 
 function base10Log() {
     let display = document.getElementById("display");
-    display.value += "log(";
+    display.value += "Math.log(";
 }
 
 function pi() {
@@ -55,4 +51,5 @@ function backSpace() {
 }
 
 //-------------------------------------------------History Shenanigans-------------------------------------------------------------
+
 

@@ -1,55 +1,102 @@
-function display(value) {
-    document.getElementById("result").value += value;
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadHistory();
+});
+
+function loadHistory() {
+    const history = JSON.parse(localStorage.getItem('calculatorHistory')) || [];
+    const historyList = document.getElementById('historyList');
+
+    historyList.innerHTML = '';
+
+
+    history.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${index + 1}. ${item}`;
+        li.onclick = () => {
+            document.getElementById('display').value = item;
+        };
+        historyList.appendChild(li);
+    });
 }
 
+
+function saveHistory(expression) {
+    const history = JSON.parse(localStorage.getItem('calculatorHistory')) || [];
+
+    history.push(expression);
+
+    localStorage.setItem('calculatorHistory', JSON.stringify(history));
+
+
+    updateHistoryUI();
+}
+
+
+function updateHistoryUI() {
+    const history = JSON.parse(localStorage.getItem('calculatorHistory')) || [];
+    const historyList = document.getElementById('historyList');
+
+    historyList.innerHTML = '';
+
+    // Render history items
+    history.forEach((item, index) => {
+        const li = document.createElement('li');
+        li.textContent = `${index + 1}. ${item}`;
+        li.onclick = () => {
+            document.getElementById('display').value = item;
+        };
+        historyList.appendChild(li);
+    });
+}
+
+
 function calculate() {
-    let p = document.getElementById("display").value;
-    let q = eval(p);
-    document.getElementById("display").value = q;
+    let expression = document.getElementById("display").value;
 
     try {
-        // Convert trigonometric function inputs from degrees to radians
-        expression = expression.replace(/sin\(/g, 'sin(' + Math.PI / 180 + '*');
-        expression = expression.replace(/cos\(/g, 'cos(' + Math.PI / 180 + '*');
-        expression = expression.replace(/tan\(/g, 'tan(' + Math.PI / 180 + '*');
 
-        result = Math.evaluate(expression);
-        display.value = result;
+        let result = eval(expression);
+
+        // Display the result
+        document.getElementById("display").value = result;
+
+
+        saveHistory(expression);
+
     } catch (error) {
-        display.value = "Error";
+
+        document.getElementById("display").value = "Error";
     }
 }
 
-function squareRoot() {
+function addToDisplay(value) {
     let display = document.getElementById("display");
-    display.value += "Math.sqrt(";
+    display.value += value;
+}
+
+
+function backSpace() {
+    let display = document.getElementById("display");
+    display.value = display.value.slice(0, -1);
+}
+
+function squareRoot() {
+    addToDisplay("Math.sqrt(");
 }
 
 function base10Log() {
-    let display = document.getElementById("display");
-    display.value += "Math.log(";
+    addToDisplay("Math.log10(");
 }
 
 function pi() {
-    let display = document.getElementById("display");
-    display.value += "pi";
+    addToDisplay("Math.PI");
 }
 
 function e() {
-    let display = document.getElementById("display");
-    display.value += "e";
+    addToDisplay("Math.E");
 }
 
 function power() {
-    let display = document.getElementById("display");
-    display.value += "**";
+    addToDisplay("**");
 }
-
-function backSpace() {
-    let bsp = document.getElementById("display").value;
-    document.getElementById("display").value=bsp.substring(0,bsp.length -1);
-}
-
-//-------------------------------------------------History Shenanigans-------------------------------------------------------------
-
-

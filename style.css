@@ -30,6 +30,10 @@ body {
     overflow-x: hidden;
 }
 
+ul {
+    list-style-type: none;
+}
+
 #display {
     width:380px;
     height:40px;

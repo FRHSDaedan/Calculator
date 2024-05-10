@@ -31,6 +31,8 @@ function saveHistory(expression, result) {
         result: result
     };
 
+    history.push(historyItem);
+
     localStorage.setItem('calculatorHistory', JSON.stringify(history));
 
 
